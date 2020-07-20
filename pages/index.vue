@@ -5,13 +5,22 @@
       <p class="title">
         书签管理
       </p>
-    
     </div>
+    <main>
+      <section class="eidt">
+        <AddInput/>
+      </section>
+    </main>
   </div>
 </template>
 
 <script>
-export default {}
+import AddInput from '../components/AddInput'
+export default {
+  components:{
+    AddInput
+  }
+}
 </script>
 
 <style lang="scss" scoped>
