@@ -11,7 +11,7 @@
            <nuxt-link to="/edit">edit</nuxt-link>
       </header>
       <section class="index">
-
+        <Table/>
       </section>
     </main>
     <p class="token">测试TOKEN:{{this.list.access_token}}</p>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-
+import Table from '../components/Table'
 export default {
   async asyncData(context){
     const data = {
@@ -45,6 +45,9 @@ export default {
     list:null,
     typeData:null
   }),
+  components:{
+    Table
+  }
 }
 </script>
 
