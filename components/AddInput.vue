@@ -12,11 +12,23 @@
         placeholder="Select a option and change input text above"
         @change="handleSelectChange"
       >
-        <a-select-option value="male">
-          male
+        <a-select-option value="前端">
+          前端
         </a-select-option>
-        <a-select-option value="female">
-          female
+        <a-select-option value="js">
+          js
+        </a-select-option>
+        <a-select-option value="vue">
+          vue
+        </a-select-option>
+        <a-select-option value="常用">
+          常用
+        </a-select-option>
+        <a-select-option value="资源">
+          资源
+        </a-select-option>
+        <a-select-option value="php">
+          php
         </a-select-option>
       </a-select>
     </a-form-item>
