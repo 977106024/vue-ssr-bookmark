@@ -7,27 +7,32 @@
       </p>
     </div>
     <main>
-      <section class="eidt">
-        <AddInput/>
+      <header>
+           <nuxt-link to="/edit">edit</nuxt-link>
+      </header>
+      <section class="index">
+
       </section>
     </main>
-    <p>测试TOKEN:{{this.list.access_token}}</p>
+    <p class="token">测试TOKEN:{{this.list.access_token}}</p>
   </div>
 </template>
 
 <script>
-import AddInput from '../components/AddInput'
+
 export default {
   async asyncData(context){
     const data = {
       email:'123@123.com',
       password:'123456'
     }
-    const data2 = {}
+    const data2 = {
+      uuid:'00843ef0-cb3a-11ea-ba1f-690a5b5467c6'
+    }
 
     const [res1,res2] = await Promise.all([
         context.$axios.post('http://api2.xuewuzhijing.top/api/auth/login',data).then(res=>res),
-        context.$axios.get('https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=f17IpDaOaBrKhSU1X4KEAIlT&client_secret=nEP7ix9bKMxGd23LmGW482sVXQY80G2a').then(res=>res)
+        context.$axios.get('https://api.xuewuzhijing.top/admin/statusQr',{params:data2}).then(res=>res)
       ])
 
       return {
@@ -40,20 +45,22 @@ export default {
     list:null,
     typeData:null
   }),
-  components:{
-    AddInput
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 .container{
+  padding: 20px;
   /deep/ .logo{
     width: 50px;
     height:50px;
   }
   .title{
     font-size: 16px;
+  }
+  p.token{
+    width: 500px;
+    word-break: break-all;
   }
 }
 </style>
