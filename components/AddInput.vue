@@ -1,12 +1,14 @@
 <template>
   <a-form :form="form" @submit="handleSubmit">
-   <a-form layout="inline"  v-for="(k, index) in form.getFieldValue('keys')"
-      :key="k">
+   <a-form layout="inline" :form="form" v-for="(k, index) in form.getFieldValue('keys')"
+      :key="k"
+       v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
+      >
     
      <a-form-item label="type">
       <a-select style="width:100px"
         v-decorator="[
-          'gender',
+          `type[${k}]`,
           { rules: [{ required: true, message: 'Please select your gender!' }] },
         ]"
         placeholder="Select a option and change input text above"
@@ -35,13 +37,13 @@
 
     <a-form-item label="name">
       <a-input style="width:200px"
-        v-decorator="['note', { rules: [{ required: true, message: 'Please input your note!' }] }]"
+        v-decorator="[`name[${k}]`, { rules: [{ required: true, message: 'Please input your note!' }] }]"
       />
     </a-form-item>
 
-     <a-form-item label="adress">
+     <a-form-item label="address">
       <a-input style="width:400px"
-        v-decorator="['note', { rules: [{ required: true, message: 'Please input your note!' }] }]"
+        v-decorator="[`address[${k}]`, { rules: [{ required: true, message: 'Please input your note!' }] }]"
       />
     </a-form-item>
    
@@ -65,6 +67,9 @@ let id = 0;
 export default {
   data() {
     return {
+      type:'',
+      name:'',
+      address:'',
       formItemLayout: {
         labelCol: {
           xs: { span: 24 },
@@ -114,18 +119,16 @@ export default {
         keys: nextKeys,
       });
     },
+    handleSelectChange(value) {
+      console.log(value);
+    },
 
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          const { keys, names } = values;
-          console.log('Received values of form: ', values);
-          console.log(
-            'Merged values:',
-            keys.map(key => names[key]),
-          );
-        }
+       this.form.validateFields((err, values) => {
+         console.log(values)
+        let {type,name,address} = values
+        this.$emit('submit',{type,name,address})
       });
     },
   },
