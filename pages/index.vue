@@ -8,7 +8,7 @@
     </div>
     <main>
       <header>
-           <nuxt-link to="/edit">edit</nuxt-link>
+           <nuxt-link to="/edit">add</nuxt-link>
       </header>
       <section class="index">
         <Table/>
